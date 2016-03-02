@@ -59,8 +59,7 @@ If you'd like more information on what's possible with Socrate's asynchronous fl
 
 Wherever you can access state in Socrates it is frozen, or in other words, read-only. This eliminates any possibility of modified references causing unexpected changes to our state.
 
-By freezing state only in development, it steers our code in an immutable direction without
-handicapping performance in production.
+By freezing state only in development, it steers our code towards the immutable direction without handicapping performance in production.
 
 #### III. Reducers do not replace state, they update state
 
