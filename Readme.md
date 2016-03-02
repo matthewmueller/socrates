@@ -97,7 +97,7 @@ store({ type: 'change user', payload: { ... }})
 
 Socrates includes an opinionated way to setup reducers, called a **reducer tree**.
 
-Reducer trees make it very easy to zero in on the reducers you want to operate on the dispatched action. For those of you familiar with redux and it's ecosystem, it's basically as if [combineReducers](http://redux.js.org/docs/api/combineReducers.html) and [handleAction](https://github.com/acdlite/redux-actions#handleactiontype-reducer--reducermap) had a child.
+Reducer trees make it very easy to zero in on the reducers you want to operate on the dispatched action. For those of you familiar with redux and it's ecosystem, it's basically as if [combineReducers](http://redux.js.org/docs/api/combineReducers.html) and [handleActions](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) had a child.
 
 Here's an example:
 
