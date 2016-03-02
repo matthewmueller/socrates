@@ -126,8 +126,6 @@ var store = Socrates({
   }
 })
 
-var state()
-
 // 1. boot up socrates with our initial state
 // 2. change the user settings
 store(
