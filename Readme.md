@@ -73,11 +73,11 @@ function reducer (state, action) {
 }
 ```
 
-You can simply return the updates:
+You can simply return a diff:
 
 ```js
 function reducer (state, action) {
-  return action.payload
+  return { phone: 8674305 }
 }
 ```
 
