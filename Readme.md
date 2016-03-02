@@ -1,7 +1,7 @@
 
   ![socrates](https://cldup.com/42vmtchht8.png)
 
-  Batteries-included redux stack to reduce all the boilerplate.
+  Batteries-included [redux](github.com/reactjs/redux) stack to reduce boilerplate and enforce good practices.
 
 ## Example
 
@@ -27,7 +27,7 @@ npm install socrates
 
 ## Principles
 
-**I. Resolve any asynchrony up front**
+#### I. Resolve any asynchrony up front
 
 This way the rest of your middleware can operate synchronously on
 plain action objects. This allows us to easily reproduce our application
@@ -55,14 +55,14 @@ Additionally, Socrates efforces that the returned result is a [Flux Standard Act
 
 If you'd like more information on what's possible with Socrate's asynchronous flows. See [vo's](https://github.com/lapwinglabs/vo/blob/master/test/pipeline.js) tests for more details.
 
-**II. All state is frozen (in development)**
+#### II. All state is frozen (in development)
 
 Wherever you can access state in Socrates it is frozen, or in other words, read-only. This eliminates any possibility of modified references causing unexpected changes to our state.
 
 By freezing state only in development, it steers our code in an immutable direction without
 handicapping performance in production.
 
-**Reducers do not replace state, they update state**
+#### III. Reducers do not replace state, they update state
 
 In normal redux, reducers replace state. In socrates, they update state.
 
@@ -84,7 +84,7 @@ function reducer (state, action) {
 
 And Socrates will effiently update the state using code inspired by [updeep](https://github.com/substantial/updeep). To remove a field, you can pass `null` as the value.
 
-**Dispatch always returns a Promise**
+#### IV. Dispatch always returns a Promise
 
 By always returning a promise, it centralizes our error handling and gives us a way to hook into when dispatch finished.
 
@@ -94,13 +94,13 @@ store({ type: 'change user', payload: { ... }})
   .catch(failure)
 ```
 
-**Use reducer trees for modular and efficient reducer functions**
+#### V. Use reducer trees for modular and efficient reducer functions
 
 Socrates includes an opinionated way to setup reducers, called a **reducer tree**.
 
 Reducer trees make it very easy to zero in on the reducers you want to operate on the dispatched action. For those of you familiar with redux and it's ecosystem, it's basically as if [combineReducers](http://redux.js.org/docs/api/combineReducers.html) and [handleAction](https://github.com/acdlite/redux-actions#handleactiontype-reducer--reducermap) had a child.
 
-Here's an example
+Here's an example:
 
 ```js
 var store = Socrates({
@@ -156,12 +156,12 @@ function into Socrates.
 
 ## API
 
-**socrates = Socrates([ middleware: array ], reducer: object|function)**
+**`socrates = Socrates([ middleware: array ], reducer: object|function)`**
 
 Create a store instance with an optional middleware array and a reducer.
 If the reducer is an object, it will create a reducer tree.
 
-**socrates(action: mixed, ...): Promise**
+**`socrates(action: mixed, ...): Promise`**
 
 Dispatches an action. Dispatching can take on many forms:
 
@@ -210,11 +210,11 @@ socrates(function * (state) {
 })
 ```
 
-**socrates(): Object**
+**`socrates(): Object`**
 
 Getting our state. This will be frozen in development
 
-**socrates.subscribe(listener: function)**
+**`socrates.subscribe(listener: function)`**
 
 Subscribe to changes in our store
 
