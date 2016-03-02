@@ -69,7 +69,7 @@ So instead of replacing your state like this:
 
 ```js
 function reducer (state, action) {
-  return Object.assign(state, action.payload)
+  return Object.assign({}, state, action.payload)
 }
 ```
 
