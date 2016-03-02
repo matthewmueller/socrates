@@ -155,12 +155,12 @@ function into Socrates.
 
 ## API
 
-**`socrates = Socrates([ middleware: array ], reducer: object|function)`**
+#### `socrates = Socrates([ middleware: array ], reducer: object|function)`
 
 Create a store instance with an optional middleware array and a reducer.
 If the reducer is an object, it will create a reducer tree.
 
-**`socrates(action: mixed, ...): Promise`**
+#### `socrates(action: mixed, ...): Promise`
 
 Dispatches an action. Dispatching can take on many forms:
 
@@ -209,11 +209,11 @@ socrates(function * (state) {
 })
 ```
 
-**`socrates(): Object`**
+#### `socrates(): Object`
 
 Getting our state. This will be frozen in development
 
-**`socrates.subscribe(listener: function)`**
+#### `socrates.subscribe(listener: function)`
 
 Subscribe to changes in our store
 
