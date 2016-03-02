@@ -25,6 +25,7 @@
     "vo": "^3.0.4"
   },
   "devDependencies": {
+    "browserify": "^13.0.0",
     "mocha": "^2.4.5"
   },
   "main": "lib/index"
