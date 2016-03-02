@@ -77,7 +77,7 @@ You can simply return a diff:
 
 ```js
 function reducer (state, action) {
-  return { phone: 8674309 }
+  return { phone: 8675309 }
 }
 ```
 
