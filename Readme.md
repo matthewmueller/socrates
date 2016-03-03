@@ -1,7 +1,7 @@
 
   ![socrates](https://cldup.com/42vmtchht8.png)
 
-  Small (12kb), batteries-included [redux](github.com/reactjs/redux) stack to reduce boilerplate and enforce good practices.
+  Small (12kb), batteries-included [redux](github.com/reactjs/redux) stack to reduce boilerplate and promote good habits.
 
 ## Example
 
