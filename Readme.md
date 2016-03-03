@@ -51,7 +51,7 @@ store(function * (state) {
 })
 ```
 
-Additionally, Socrates efforces that the returned result is a [Flux Standard Action](https://github.com/acdlite/flux-standard-action#actions), so our actions all have the same format.
+Additionally, Socrates enforces that the returned result is a [Flux Standard Action](https://github.com/acdlite/flux-standard-action#actions), so our actions all have the same format.
 
 If you'd like more information on what's possible with Socrate's asynchronous flows. See [vo's](https://github.com/lapwinglabs/vo/blob/master/test/pipeline.js) tests for more details.
 
