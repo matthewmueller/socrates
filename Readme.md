@@ -81,7 +81,7 @@ function reducer (state, action) {
 }
 ```
 
-And Socrates will effiently update the state using code inspired by [updeep](https://github.com/substantial/updeep). To remove a field, you can pass `null` as the value.
+And Socrates will efficiently update the state using code inspired by [updeep](https://github.com/substantial/updeep). To remove a field, you can pass `null` as the value.
 
 #### IV. Dispatch always returns a Promise
 
@@ -97,14 +97,14 @@ store({ type: 'change user', payload: { ... }})
 
 Socrates includes an opinionated way to setup reducers, called a **reducer tree**.
 
-Reducer trees make it very easy to zero in on the reducers you want to operate on the dispatched action. For those of you familiar with redux and it's ecosystem, it's basically as if [combineReducers](http://redux.js.org/docs/api/combineReducers.html) and [handleActions](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) had a child.
+Reducer trees make it very easy to zero in on the reducers you want to operate on the dispatched action. For those of you familiar with redux and it's ecosystem, it's basically as if [combineReducers](http://redux.js.org/docs/api/combineReducers.html) and [handleActions](https://github.com/acdlite/redux-actions#handleactionsreducermap-defaultstate) had a child, where the functions are the actions and the objects are the state's shape.
 
 Here's an example:
 
 ```js
 var store = Socrates({
   // run with type: "boot"
-  boot: function (state, action) {
+  boot(state, action) {
     return action
   },
   user: {
