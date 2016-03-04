@@ -82,7 +82,7 @@ function freeze(object) {
 }
 
 }).call(this,require('_process'))
-},{"_process":26}],2:[function(require,module,exports){
+},{"_process":22}],2:[function(require,module,exports){
 'use strict'
 
 /**
@@ -171,7 +171,7 @@ function identity (state, action) {
   return action.payload
 }
 
-},{"./freeze":1,"./reducer":4,"./resolve":5,"object-assign":30,"redux":36,"sliced":41}],3:[function(require,module,exports){
+},{"./freeze":1,"./reducer":4,"./resolve":5,"object-assign":26,"redux":32,"sliced":37}],3:[function(require,module,exports){
 /**
  * Module Dependencies
  */
@@ -227,7 +227,7 @@ function is_fsa (value) {
   return true
 }
 
-},{"isobj":28,"lodash.iserror":29}],4:[function(require,module,exports){
+},{"isobj":24,"lodash.iserror":25}],4:[function(require,module,exports){
 /**
  * Module dependencies
  */
@@ -257,7 +257,7 @@ function reducer (fn) {
   }
 }
 
-},{"./tree":6,"./update":7,"isobj":28}],5:[function(require,module,exports){
+},{"./tree":6,"./update":7,"isobj":24}],5:[function(require,module,exports){
 'use strict'
 
 /**
@@ -326,7 +326,7 @@ function stringify (mixed) {
   }
 }
 
-},{"./freeze":1,"./is-fsa":3,"redux":36,"sliced":41,"vo":42}],6:[function(require,module,exports){
+},{"./freeze":1,"./is-fsa":3,"redux":32,"sliced":37,"vo":38}],6:[function(require,module,exports){
 /**
  * Module dependencies
  */
@@ -465,7 +465,7 @@ function walk (tree, trail) {
 //   }
 // })
 
-},{"@f/combine-reducers":8,"@f/compose-reducers":20,"@f/handle-actions":22,"component-xor":27}],7:[function(require,module,exports){
+},{"@f/combine-reducers":8,"@f/compose-reducers":18,"@f/handle-actions":20,"component-xor":23}],7:[function(require,module,exports){
 'use strict';
 
 /**
@@ -578,7 +578,7 @@ function array (original, updates) {
 // console.log(update(fruits, 'd'))
 // fruits.push('d')
 
-},{"./freeze":1,"isobj":28,"object-assign":30,"sliced":41}],8:[function(require,module,exports){
+},{"./freeze":1,"isobj":24,"object-assign":26,"sliced":37}],8:[function(require,module,exports){
 /**
  * Modules
  */
@@ -895,10 +895,6 @@ function toArray (arr) {
 }
 
 },{}],20:[function(require,module,exports){
-arguments[4][18][0].apply(exports,arguments)
-},{"@f/to-array":21,"dup":18}],21:[function(require,module,exports){
-arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],22:[function(require,module,exports){
 /**
  * Modules
  */
@@ -932,11 +928,7 @@ function scopeReducer (type, reducer, defaultState) {
   }
 }
 
-},{"@f/compose-reducers":23,"@f/is-undefined":25}],23:[function(require,module,exports){
-arguments[4][18][0].apply(exports,arguments)
-},{"@f/to-array":24,"dup":18}],24:[function(require,module,exports){
-arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],25:[function(require,module,exports){
+},{"@f/compose-reducers":18,"@f/is-undefined":21}],21:[function(require,module,exports){
 /**
  * Expose isUndefined
  */
@@ -953,7 +945,7 @@ function isUndefined (value) {
   return typeof value === 'undefined'
 }
 
-},{}],26:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1046,7 +1038,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],27:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
  * Expose `xor`
  */
@@ -1070,14 +1062,14 @@ function xor(a, b) {
   return a ^ b;
 }
 
-},{}],28:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 module.exports = function (obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 };
 
-},{}],29:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * lodash 3.1.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -1153,7 +1145,7 @@ function isObjectLike(value) {
 
 module.exports = isError;
 
-},{}],30:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /* eslint-disable no-unused-vars */
 'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -1194,7 +1186,7 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],31:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1252,7 +1244,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":34}],32:[function(require,module,exports){
+},{"./compose":30}],28:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1304,7 +1296,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],33:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1434,7 +1426,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":35,"./utils/warning":37,"_process":26,"lodash/isPlainObject":40}],34:[function(require,module,exports){
+},{"./createStore":31,"./utils/warning":33,"_process":22,"lodash/isPlainObject":36}],30:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1464,7 +1456,7 @@ function compose() {
     }, last.apply(undefined, arguments));
   };
 }
-},{}],35:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1681,7 +1673,7 @@ function createStore(reducer, initialState, enhancer) {
     replaceReducer: replaceReducer
   };
 }
-},{"lodash/isPlainObject":40}],36:[function(require,module,exports){
+},{"lodash/isPlainObject":36}],32:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1730,7 +1722,7 @@ exports.bindActionCreators = _bindActionCreators2["default"];
 exports.applyMiddleware = _applyMiddleware2["default"];
 exports.compose = _compose2["default"];
 }).call(this,require('_process'))
-},{"./applyMiddleware":31,"./bindActionCreators":32,"./combineReducers":33,"./compose":34,"./createStore":35,"./utils/warning":37,"_process":26}],37:[function(require,module,exports){
+},{"./applyMiddleware":27,"./bindActionCreators":28,"./combineReducers":29,"./compose":30,"./createStore":31,"./utils/warning":33,"_process":22}],33:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1755,7 +1747,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],38:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -1777,7 +1769,7 @@ function isHostObject(value) {
 
 module.exports = isHostObject;
 
-},{}],39:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -1807,7 +1799,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],40:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var isHostObject = require('./_isHostObject'),
     isObjectLike = require('./isObjectLike');
 
@@ -1875,7 +1867,7 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"./_isHostObject":38,"./isObjectLike":39}],41:[function(require,module,exports){
+},{"./_isHostObject":34,"./isObjectLike":35}],37:[function(require,module,exports){
 
 /**
  * An Array.prototype.slice.call(arguments) alternative
@@ -1910,7 +1902,7 @@ module.exports = function (args, slice, sliceEnd) {
 }
 
 
-},{}],42:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 (function (global){
 'use strict'
 
@@ -2020,7 +2012,7 @@ Vo.catch = function (fn) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./lib/pipeline":44,"./lib/stack":45,"es6-promise":49,"sliced":41}],43:[function(require,module,exports){
+},{"./lib/pipeline":40,"./lib/stack":41,"es6-promise":45,"sliced":37}],39:[function(require,module,exports){
 /**
  * Module Dependencies
  */
@@ -2194,7 +2186,7 @@ function Identity (value) {
   }
 }
 
-},{"./type":46,"err-candy":47,"lodash.compact":50,"wrapped":51}],44:[function(require,module,exports){
+},{"./type":42,"err-candy":43,"lodash.compact":46,"wrapped":47}],40:[function(require,module,exports){
 /**
  * Module Dependencies
  */
@@ -2240,7 +2232,7 @@ function Pipeline (pipeline, context, args, done) {
   next.apply(null, [null].concat(args))
 }
 
-},{"./compile":43,"sliced":41}],45:[function(require,module,exports){
+},{"./compile":39,"sliced":37}],41:[function(require,module,exports){
 /**
  * Module Dependencies
  */
@@ -2285,7 +2277,7 @@ function Stack (stack, context, args, done) {
   next()
 }
 
-},{"./compile":43}],46:[function(require,module,exports){
+},{"./compile":39}],42:[function(require,module,exports){
 /**
  * Module dependencies
  */
@@ -2317,7 +2309,7 @@ function type(v) {
     : typeof v
 }
 
-},{}],47:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 (function (process){
 /**
  * Module dependencies
@@ -2462,7 +2454,7 @@ function repeat (str, n) {
 }
 
 }).call(this,require('_process'))
-},{"_process":26,"stack-utils":48}],48:[function(require,module,exports){
+},{"_process":22,"stack-utils":44}],44:[function(require,module,exports){
 (function (process){
 module.exports = StackUtils;
 
@@ -2750,7 +2742,7 @@ Object.keys(StackUtils.prototype).forEach(function (key) {
 });
 
 }).call(this,require('_process'))
-},{"_process":26}],49:[function(require,module,exports){
+},{"_process":22}],45:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -3708,7 +3700,7 @@ Object.keys(StackUtils.prototype).forEach(function (key) {
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":26}],50:[function(require,module,exports){
+},{"_process":22}],46:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3749,7 +3741,7 @@ function compact(array) {
 
 module.exports = compact;
 
-},{}],51:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 /**
  * Module Dependencies
  */
@@ -3863,7 +3855,7 @@ function promise(value) {
   return value && 'function' == typeof value.then;
 }
 
-},{"co":52,"sliced":41}],52:[function(require,module,exports){
+},{"co":48,"sliced":37}],48:[function(require,module,exports){
 
 /**
  * slice() reference.
