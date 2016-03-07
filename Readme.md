@@ -15,7 +15,7 @@ var store = Store(reducer)
 store.subscribe(listener)
 
 // dispatch an action
-store.dispatch('change user.name', { name: 'an' })
+store('change user.name', { name: 'an' })
   .catch(onerror)
 ```
 
