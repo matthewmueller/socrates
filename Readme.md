@@ -1,7 +1,7 @@
 
   ![socrates](https://cldup.com/42vmtchht8.png)
 
-  Small (12kb), batteries-included [redux](https://github.com/reactjs/redux) store to reduce boilerplate and promote good habits.
+  Small (8kb), batteries-included [redux](https://github.com/reactjs/redux) store to reduce boilerplate and promote good habits.
 
 ## Example
 
