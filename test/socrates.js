@@ -286,7 +286,7 @@ describe('Socrates', function () {
           return action;
         },
         condos: {
-          add(state, action) {
+          add (state, action) {
             return state.concat(action)
           }
         }
