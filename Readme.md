@@ -28,8 +28,8 @@ npm install socrates
 
 Redux pushed us forward in 2 key ways:
 
-**I. Promoting a single state architecture**
-**II. Using an **actions dispatcher to update that state**
+#### I. Promoting a single state architecture
+#### II. Using an actions dispatcher to update that state
 
 The state management in Redux is verbose, but fantastic. Socrates aims to supplement Redux's state management to reduce keystokes and transparently combine a few confusing concepts together. Namely, **redux.combineReducer**, **FSA**, **redux-actions**, and **updeep**.
 
