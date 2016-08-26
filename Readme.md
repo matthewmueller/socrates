@@ -1,7 +1,7 @@
 
   ![socrates](https://cldup.com/42vmtchht8.png)
 
-  Small (12kb), batteries-included [redux](https://github.com/reactjs/redux) stack to reduce boilerplate and promote good habits.
+  Small (12kb), batteries-included [redux](https://github.com/reactjs/redux) store to reduce boilerplate and promote good habits.
 
 ## Example
 
@@ -16,7 +16,6 @@ store.subscribe(listener)
 
 // dispatch an action
 store('change user.name', { name: 'an' })
-  .catch(onerror)
 ```
 
 ## Installation
@@ -25,43 +24,35 @@ store('change user.name', { name: 'an' })
 npm install socrates
 ```
 
+## Context
+
+Redux pushed us forward in 2 key ways: promoting a **single state architecture** & using an **actions dispatcher** to update that state. The state management in Redux is verbose, but fantastic. Socrates aims to supplement Redux's state management to reduce keystokes and transparently combine a few confusing concepts together. Namely, **redux.combineReducer**, **FSA**, **redux-actions**, and **updeep**.
+
 ## Principles
 
-#### I. Resolve any asynchrony up front
+#### I. State should be separate from the action log (redux middleware)
 
-This way the rest of your middleware can operate synchronously on
-plain action objects. This allows us to easily reproduce our application
-state by recording and replaying these plain actions.
+Socrates is only used to update state. Action logging is actually a much bigger part of application architecture than just updating state. Unfortunately, if you're new to Redux or just reading tutorials, you'll assume that actions are only used to update state. You should be dispatching actions to make HTTP requests, setup Websockets, and **all other side effects**. While you can do this in Redux's middleware, it's flow is mind-bending because Redux's middleware is synchronous, so you need to internally re-dispatch to achieve asynchronous behavior.
 
-To this end, Socrates supports dispatching promises, generators, asynchronous
-and synchronous functions. It also support running actions in series and in parallel
-or both for more complex pipelines. These pipelines are where your DOM effects and
-other side-effects should live.
+I have a version of middleware inspired by Koa's middleware done on the server that I'll be releasing soon to help you out with this.
 
-```js
-store(function * (state) {
-  var res = yield fetch('http://google.com')
-  return {
-    type: 'fetch',
-    payload: {
-      status: res.status,
-      text: res.text
-    }
-  }
-})
-```
+#### II. changes are *always* synchronous
+
+Leave the the asynchrony to the action log (redux middleware). State changes that are rejected will throw errors.
+
+#### II. Enforce a standard action object
 
 Additionally, Socrates enforces that the returned result is a [Flux Standard Action](https://github.com/acdlite/flux-standard-action#actions), so our actions all have the same format.
 
-If you'd like more information on what's possible with Socrate's asynchronous flows. See [vo's](https://github.com/lapwinglabs/vo/blob/master/test/pipeline.js) tests for more details.
+This greatly slight constraint goes a long ways towards better interoperability.
 
-#### II. All state is frozen (in development)
+#### III. All state is frozen (in development)
 
 Wherever you can access state in Socrates it is frozen, or in other words, read-only. This eliminates any possibility of modified references causing unexpected changes to our state.
 
 By freezing state only in development, it steers our code towards the immutable direction without handicapping performance in production.
 
-#### III. Reducers do not replace state, they update state
+#### IV. Reducers do not replace state, they update state
 
 In normal redux, reducers replace state. In socrates, they update state.
 
@@ -82,16 +73,6 @@ function reducer (state, action) {
 ```
 
 And Socrates will efficiently update the state using code inspired by [updeep](https://github.com/substantial/updeep). To remove a field, you can pass `null` as the value.
-
-#### IV. Dispatch always returns a Promise
-
-By always returning a promise, it centralizes our error handling and gives us a way to hook into when dispatch finished.
-
-```js
-store({ type: 'change user', payload: { ... }})
-  .then(success)
-  .catch(failure)
-```
 
 #### V. Use reducer trees for modular and efficient reducer functions
 
@@ -153,12 +134,12 @@ function into Socrates.
 
 ## API
 
-#### `socrates = Socrates([ middleware: array ], reducer: object|function)`
+#### `store = Socrates(reducer: object|function)`
 
 Create a store instance with an optional middleware array and a reducer.
 If the reducer is an object, it will create a reducer tree.
 
-#### `socrates(action: mixed, ...): Promise`
+#### `store(action: mixed, ...): state`
 
 Dispatches an action. Dispatching can take on many forms:
 
@@ -185,33 +166,13 @@ socrates([
 socrates(function (state) {
   return { type: 'change age', payload: { age: 26 }}
 })
-
-// using an asynchronous function to dispatch an action
-socrates(function (state, fn) {
-  setTimeout(function () {
-    fn(null, { type: 'change age', payload: { age: 26 }})
-  }, 1000)
-})
-
-// using a promise to dispatch an action
-socrates(function (state) {
-  return new Promise(function (success, failure) {
-    return success({ type: 'change age', payload: { age: 26 }})
-  })
-})
-
-// using a generator to dispatch an action
-socrates(function * (state) {
-  yield wait(1000)
-  return { type: 'change age', payload: { age: 26 }}
-})
 ```
 
-#### `socrates(): Object`
+#### `store(): Object`
 
 Getting our state. This will be frozen in development
 
-#### `socrates.subscribe(listener: function)`
+#### `store.subscribe(listener: function)`
 
 Subscribe to changes in our store
 

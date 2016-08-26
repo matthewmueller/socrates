@@ -22,12 +22,31 @@
     "lodash.iserror": "^3.1.1",
     "object-assign": "^4.0.1",
     "redux": "^3.3.1",
+    "redux-routes": "1.0.3",
     "sliced": "^1.0.1",
     "vo": "^3.0.4"
   },
   "devDependencies": {
+    "babel-eslint": "6.1.2",
     "browserify": "^13.0.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "snazzy": "4.0.1"
   },
-  "main": "lib/index"
+  "main": "lib/index",
+  "scripts": {
+    "lint": "snazzy",
+    "pretest": "npm run lint",
+    "test": "mocha"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach"
+    ]
+  }
 }
