@@ -279,6 +279,48 @@ describe('Socrates', function () {
         }
       })
     })
+
+    it('should support updating arrays (#14)', function () {
+      const store = Socrates({
+        boot (state, action) {
+          return action;
+        },
+        condos: {
+          add(state, action) {
+            return state.concat(action)
+          }
+        }
+      })
+
+      store({
+        type: 'boot',
+        payload: {
+          name: 'matt',
+          condos: [
+            { id: 1, name: 'Tierras del cafe', subdomain: 'tierrasdelcafe' },
+            { id: 2, name: 'Real Santa Maria', subdomain: 'realsantamaria' },
+            { id: 3, name: 'San Agusting', subdomain: 'sanagusting' }
+          ]
+        }
+      })
+
+      store(function (state) {
+        return {
+          type: 'add condos',
+          payload: [{ id: 4, name: 'Villa Real', subdomain: 'villareal' }]
+        }
+      })
+
+      assert.deepEqual(store(), {
+        name: 'matt',
+        condos: [
+          { id: 1, name: 'Tierras del cafe', subdomain: 'tierrasdelcafe' },
+          { id: 2, name: 'Real Santa Maria', subdomain: 'realsantamaria' },
+          { id: 3, name: 'San Agusting', subdomain: 'sanagusting' },
+          { id: 4, name: 'Villa Real', subdomain: 'villareal' }
+        ]
+      })
+    })
   })
 
   describe('getting state', function () {
