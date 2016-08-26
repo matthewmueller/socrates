@@ -283,7 +283,7 @@ describe('Socrates', function () {
     it('should support updating arrays (#14)', function () {
       const store = Socrates({
         boot (state, action) {
-          return action;
+          return action
         },
         condos: {
           add (state, action) {
