@@ -29,6 +29,7 @@
   "devDependencies": {
     "babel-eslint": "6.1.2",
     "browserify": "^13.0.0",
+    "devtool": "2.2.0",
     "mocha": "^2.4.5",
     "snazzy": "4.0.1"
   },
@@ -36,7 +37,7 @@
   "scripts": {
     "lint": "snazzy",
     "pretest": "npm run lint",
-    "test": "mocha"
+    "test": "devtool node_modules/mocha/bin/_mocha -qc -- ./test/"
   },
   "standard": {
     "parser": "babel-eslint",
