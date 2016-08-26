@@ -26,7 +26,9 @@ npm install socrates
 
 ## Context
 
-Redux pushed us forward in 2 key ways: promoting a **single state architecture** & using an **actions dispatcher** to update that state. The state management in Redux is verbose, but fantastic. Socrates aims to supplement Redux's state management to reduce keystokes and transparently combine a few confusing concepts together. Namely, **redux.combineReducer**, **FSA**, **redux-actions**, and **updeep**.
+Redux pushed us forward in 2 key ways: promoting a **single state architecture** & using an **actions dispatcher to update that state**.
+
+The state management in Redux is verbose, but fantastic. Socrates aims to supplement Redux's state management to reduce keystokes and transparently combine a few confusing concepts together. Namely, **redux.combineReducer**, **FSA**, **redux-actions**, and **updeep**.
 
 ## Principles
 
@@ -36,23 +38,23 @@ Socrates is only used to update state. Action logging is actually a much bigger 
 
 I have a version of middleware inspired by Koa's middleware done on the server that I'll be releasing soon to help you out with this.
 
-#### II. changes are *always* synchronous
+#### II. Changes are *always* synchronous
 
 Leave the the asynchrony to the action log (redux middleware). State changes that are rejected will throw errors.
 
-#### II. Enforce a standard action object
+#### III. Enforce a standard action object
 
 Additionally, Socrates enforces that the returned result is a [Flux Standard Action](https://github.com/acdlite/flux-standard-action#actions), so our actions all have the same format.
 
 This greatly slight constraint goes a long ways towards better interoperability.
 
-#### III. All state is frozen (in development)
+#### IV. All state is frozen (in development)
 
 Wherever you can access state in Socrates it is frozen, or in other words, read-only. This eliminates any possibility of modified references causing unexpected changes to our state.
 
 By freezing state only in development, it steers our code towards the immutable direction without handicapping performance in production.
 
-#### IV. Reducers do not replace state, they update state
+#### V. Reducers do not replace state, they update state
 
 In normal redux, reducers replace state. In socrates, they update state.
 
@@ -74,7 +76,7 @@ function reducer (state, action) {
 
 And Socrates will efficiently update the state using code inspired by [updeep](https://github.com/substantial/updeep). To remove a field, you can pass `null` as the value.
 
-#### V. Use reducer trees for modular and efficient reducer functions
+#### VI. Use reducer trees for modular and efficient reducer functions
 
 Socrates includes an opinionated way to setup reducers, called a **reducer tree**.
 
