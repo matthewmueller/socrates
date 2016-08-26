@@ -30,7 +30,7 @@ Redux pushed us forward in 2 key ways:
 
   **I. Promoting a single state architecture**
 
-  **II. Using an actions dispatcher to update that state**
+  **II. Using an action dispatcher to update that state**
 
 The state management in Redux is verbose, but fantastic. Socrates aims to supplement Redux's state management to reduce keystokes and transparently combine a few confusing concepts together. Namely, **combineReducer**, **FSA**, **redux-actions**, and **updeep**.
 
@@ -38,9 +38,9 @@ The state management in Redux is verbose, but fantastic. Socrates aims to supple
 
 #### I. State should be separate from the action log (redux middleware)
 
-Socrates is only used to update state. Action logging is actually a much bigger part of application architecture than just updating state. Unfortunately, if you're new to Redux or just reading tutorials, you'll assume that actions are only used to update state.
+Socrates is only used to update state. Action dispatching is actually a much bigger part of application architecture than just state. Unfortunately, if you're new to Redux or just reading tutorials, you'll assume that actions are only used to update state.
 
-You should be dispatching actions to make HTTP requests, setup Websockets, and **all other side effects**. While you can do this in Redux's middleware, it's flow is mind-bending because Redux's middleware is synchronous, so you need to internally re-dispatch to achieve asynchronous behavior.
+You should be dispatching actions for **all side effects**. To make HTTP requests, setup Websockets, and set cookies. While you can do this in Redux's middleware, it's flow is mind-bending because Redux's middleware is synchronous, so you need to internally re-dispatch to achieve asynchronous behavior.
 
 I have a version of middleware inspired by Koa's middleware done on the server that I'll be releasing soon to help you out with this.
 
