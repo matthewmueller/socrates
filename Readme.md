@@ -38,7 +38,9 @@ The state management in Redux is verbose, but fantastic. Socrates aims to supple
 
 #### I. State should be separate from the action log (redux middleware)
 
-Socrates is only used to update state. Action logging is actually a much bigger part of application architecture than just updating state. Unfortunately, if you're new to Redux or just reading tutorials, you'll assume that actions are only used to update state. You should be dispatching actions to make HTTP requests, setup Websockets, and **all other side effects**. While you can do this in Redux's middleware, it's flow is mind-bending because Redux's middleware is synchronous, so you need to internally re-dispatch to achieve asynchronous behavior.
+Socrates is only used to update state. Action logging is actually a much bigger part of application architecture than just updating state. Unfortunately, if you're new to Redux or just reading tutorials, you'll assume that actions are only used to update state.
+
+You should be dispatching actions to make HTTP requests, setup Websockets, and **all other side effects**. While you can do this in Redux's middleware, it's flow is mind-bending because Redux's middleware is synchronous, so you need to internally re-dispatch to achieve asynchronous behavior.
 
 I have a version of middleware inspired by Koa's middleware done on the server that I'll be releasing soon to help you out with this.
 
