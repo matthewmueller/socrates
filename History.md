@@ -1,4 +1,9 @@
 
+2.0.0 / 2016-08-26
+==================
+
+  * remove promises & middleware, fix the reducer trees, cleanup repo
+
 1.0.2 / 2016-03-08
 ==================
 
