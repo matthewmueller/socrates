@@ -1,4 +1,9 @@
 
+3.0.0 / 2016-08-28
+==================
+
+  * change nicer sentence type (create user) to more generic colon-based (user:create)
+
 2.0.0 / 2016-08-26
 ==================
 
