@@ -16,7 +16,7 @@ describe('Socrates', function () {
     it('should work with no reducer', function () {
       var store = Socrates()
       let state = store({
-        type: 'create user',
+        type: 'user:create',
         payload: {
           name: 'matt',
           age: 26
@@ -25,7 +25,7 @@ describe('Socrates', function () {
       assert.deepEqual(state, { name: 'matt', age: 26 })
 
       state = store({
-        type: 'update user',
+        type: 'user:update',
         payload: {
           name: 'an',
           age: 26
@@ -195,7 +195,7 @@ describe('Socrates', function () {
 
       let state = store({ type: 'boot', payload: { user: { name: 'matt', age: 26 } } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26 } })
-      state = store({ type: 'bump user.age', payload: 1 })
+      state = store({ type: 'user:age:bump', payload: 1 })
       assert.deepEqual(state, { user: { name: 'matt', age: 27 } })
     })
 
@@ -222,7 +222,7 @@ describe('Socrates', function () {
 
       let state = store({ type: 'boot', payload: { user: { name: 'matt', age: 26, settings: { theme: 'red' } } } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26, settings: { theme: 'red' } } })
-      state = store({ type: 'change user.settings', payload: { theme: 'blue' } })
+      state = store({ type: 'user:settings:change', payload: { theme: 'blue' } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26, settings: { theme: 'blue' } } })
       assert.ok(called)
     })
@@ -256,7 +256,7 @@ describe('Socrates', function () {
         }
       })
 
-      store({ type: 'update user.settings', payload: { password: 'lol' } })
+      store({ type: 'user:settings:update', payload: { password: 'lol' } })
       assert.deepEqual(store(), {
         user: {
           name: 'matt',
@@ -266,7 +266,7 @@ describe('Socrates', function () {
         }
       })
 
-      store({ type: 'update user.theme', payload: { color: 'red' } })
+      store({ type: 'user:theme:update', payload: { color: 'red' } })
       assert.deepEqual(store(), {
         user: {
           name: 'matt',
@@ -306,7 +306,7 @@ describe('Socrates', function () {
 
       store(function (state) {
         return {
-          type: 'add condos',
+          type: 'condos:add',
           payload: [{ id: 4, name: 'Villa Real', subdomain: 'villareal' }]
         }
       })
