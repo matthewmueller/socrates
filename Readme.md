@@ -15,7 +15,7 @@ var store = Store(reducer)
 store.subscribe(listener)
 
 // dispatch an action
-store('change user.name', { name: 'an' })
+store('user:name:change', { name: 'an' })
 ```
 
 ## Installation
@@ -131,14 +131,13 @@ store(
     }
   },
   {
-    type: 'change user.settings',
+    type: 'user:settings:change',
     payload: { theme: 'blue' }
   }
 })
 ```
 
-If you don't like this approach, you can always just pass your custom reducer
-function into Socrates.
+If you don't like this approach, you can always just pass your custom reducer function into Socrates.
 
 ## API
 
@@ -153,26 +152,26 @@ Dispatches an action. Dispatching can take on many forms:
 
 ```js
 // simple object dispatch
-socrates({ type: 'change name', payload: { name: 'an' }})
+socrates({ type: 'name:change', payload: { name: 'an' }})
 
 // using an event emitter style
-socrates('change name', { name: 'an' })
+socrates('name:change', { name: 'an' })
 
 // dispatch multiple object in series
 socrates(
-  { type: 'change name', payload: { name: 'an' }},
-  { type: 'change age', payload: { age: 26 }}
+  { type: 'name:change', payload: { name: 'an' }},
+  { type: 'age:change', payload: { age: 26 }}
 )
 
 // dispatch multiple object in parallel
 socrates([
-  { type: 'change name', payload: { name: 'an' }},
-  { type: 'change age', payload: { age: 26 }}
+  { type: 'name:change', payload: { name: 'an' }},
+  { type: 'age:change', payload: { age: 26 }}
 ])
 
 // using a function to dispatch an action
 socrates(function (state) {
-  return { type: 'change age', payload: { age: 26 }}
+  return { type: 'age:change', payload: { age: 26 }}
 })
 ```
 
