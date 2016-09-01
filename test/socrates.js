@@ -128,13 +128,16 @@ describe('Socrates', function () {
       })
     })
 
-    it('should merge the payload', function () {
+    it('should allow an emitter of literal strings', function() {
       var store = Socrates()
-      let state = store('change name', { name: 'matt' }, { age: 26 })
-      assert.deepEqual(state, {
-        name: 'matt',
-        age: 26
-      })
+      let state = store('change name', 'matt')
+      assert.deepEqual(state, 'matt')
+    })
+
+    it('should allow an emitter of literal numbers', function() {
+      var store = Socrates()
+      let state = store('change age', 5)
+      assert.deepEqual(state, 5)
     })
   })
 
@@ -320,6 +323,35 @@ describe('Socrates', function () {
           { id: 4, name: 'Villa Real', subdomain: 'villareal' }
         ]
       })
+    })
+
+    it('should support literal numbers', function() {
+      let store = Socrates({
+        boot (state, action) {
+          console.log(state, action)
+          return action
+        }
+      })
+
+      store('boot', 7)
+      store('boot', 5)
+    })
+
+    it('should support literal strings', function() {
+      let store = Socrates({
+        addons: {
+          toggle (state, action) {
+            console.log(state, action)
+            console.log(action)
+          }
+        },
+        boot (state, action) {
+          return action
+        }
+      })
+
+      store('boot', { addons: [] })
+      store('addons:toggle', 'hello')
     })
   })
 
