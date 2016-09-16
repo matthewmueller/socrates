@@ -1,4 +1,9 @@
 
+3.0.3 / 2016-09-16
+==================
+
+  * support an implicit set action unless overriden
+
 3.0.2 / 2016-09-01
 ==================
 

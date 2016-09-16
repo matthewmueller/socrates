@@ -16,6 +16,9 @@ store.subscribe(listener)
 
 // dispatch an action
 store('user:name:change', { name: 'an' })
+
+// supports implicit set for the 90% usecase
+store('user:age:set', { name: 'an' })
 ```
 
 ## Installation
