@@ -18,7 +18,7 @@ store.subscribe(listener)
 store('user:name:change', { name: 'an' })
 
 // supports implicit set for the 90% usecase
-store('user:age:set', { name: 'an' })
+store('user:age:set', 27)
 ```
 
 ## Installation
