@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@f/combine-reducers": "^1.2.1",
-    "@f/handle-actions": "^1.1.1",
     "isobj": "^1.0.0",
     "lodash.iserror": "^3.1.1",
     "object-assign": "^4.0.1",
     "redux": "^3.3.1",
+    "setvalue": "1.0.0",
     "sliced": "1.0.1"
   },
   "devDependencies": {

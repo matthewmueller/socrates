@@ -128,13 +128,13 @@ describe('Socrates', function () {
       })
     })
 
-    it('should allow an emitter of literal strings', function() {
+    it('should allow an emitter of literal strings', function () {
       var store = Socrates()
       let state = store('change name', 'matt')
       assert.deepEqual(state, 'matt')
     })
 
-    it('should allow an emitter of literal numbers', function() {
+    it('should allow an emitter of literal numbers', function () {
       var store = Socrates()
       let state = store('change age', 5)
       assert.deepEqual(state, 5)
@@ -325,24 +325,23 @@ describe('Socrates', function () {
       })
     })
 
-    it('should support literal numbers', function() {
+    it('should support literal numbers', function () {
       let store = Socrates({
         boot (state, action) {
-          console.log(state, action)
           return action
         }
       })
 
       store('boot', 7)
       store('boot', 5)
+      assert.equal(store(), 5)
     })
 
-    it('should support literal strings', function() {
+    it('should support literal strings', function () {
       let store = Socrates({
         addons: {
           toggle (state, action) {
-            console.log(state, action)
-            console.log(action)
+            return action
           }
         },
         boot (state, action) {
@@ -352,6 +351,31 @@ describe('Socrates', function () {
 
       store('boot', { addons: [] })
       store('addons:toggle', 'hello')
+      assert.deepEqual(store(), { addons: 'hello' })
+    })
+
+    it('should just assign when theres no reducer for it', function () {
+      let store = Socrates({})
+      store('addons:set', [])
+      store('url:path:set', 'some url')
+      assert.deepEqual(store(), {
+        addons: [],
+        url: {
+          path: 'some url'
+        }
+      })
+    })
+
+    it('should delete with set and a null payload', function () {
+      let store = Socrates({})
+      store('addons:set', [])
+      store('addons:set', null)
+      store('url:path:set', 'some url')
+      assert.deepEqual(store(), {
+        url: {
+          path: 'some url'
+        }
+      })
     })
   })
 
