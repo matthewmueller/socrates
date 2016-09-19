@@ -15,10 +15,10 @@ var store = Store(reducer)
 store.subscribe(listener)
 
 // dispatch an action
-store('user:name:change', { name: 'an' })
+store('change:user.name', { name: 'an' })
 
 // supports implicit set for the 90% usecase
-store('user:age:set', 27)
+store('set:user.age', 27)
 ```
 
 ## Installation
@@ -134,7 +134,7 @@ store(
     }
   },
   {
-    type: 'user:settings:change',
+    type: 'change:user:settings',
     payload: { theme: 'blue' }
   }
 })
@@ -158,23 +158,23 @@ Dispatches an action. Dispatching can take on many forms:
 socrates({ type: 'name:change', payload: { name: 'an' }})
 
 // using an event emitter style
-socrates('name:change', { name: 'an' })
+socrates('change:name', { name: 'an' })
 
 // dispatch multiple object in series
 socrates(
-  { type: 'name:change', payload: { name: 'an' }},
-  { type: 'age:change', payload: { age: 26 }}
+  { type: 'change:name', payload: { name: 'an' }},
+  { type: 'change:age', payload: { age: 26 }}
 )
 
 // dispatch multiple object in parallel
 socrates([
-  { type: 'name:change', payload: { name: 'an' }},
-  { type: 'age:change', payload: { age: 26 }}
+  { type: 'change:name', payload: { name: 'an' }},
+  { type: 'change:age', payload: { age: 26 }}
 ])
 
 // using a function to dispatch an action
 socrates(function (state) {
-  return { type: 'age:change', payload: { age: 26 }}
+  return { type: 'change:age', payload: { age: 26 }}
 })
 ```
 

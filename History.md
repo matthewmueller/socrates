@@ -1,4 +1,9 @@
 
+4.0.0 / 2016-09-19
+==================
+
+  * go back to original key style user:email:boot => boot:user.email
+
 3.0.3 / 2016-09-16
 ==================
 
