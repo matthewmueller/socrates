@@ -16,7 +16,7 @@ describe('Socrates', function () {
     it('should work with no reducer', function () {
       var store = Socrates()
       let state = store({
-        type: 'user:create',
+        type: 'set',
         payload: {
           name: 'matt',
           age: 26
@@ -25,7 +25,7 @@ describe('Socrates', function () {
       assert.deepEqual(state, { name: 'matt', age: 26 })
 
       state = store({
-        type: 'user:update',
+        type: 'set',
         payload: {
           name: 'an',
           age: 26
@@ -82,7 +82,7 @@ describe('Socrates', function () {
 
       let state = store(function (state) {
         return {
-          type: 'create',
+          type: 'set',
           payload: {
             name: 'ted',
             age: 25
@@ -121,23 +121,25 @@ describe('Socrates', function () {
   describe('simple dispatch', function () {
     it('should support a simple dispatch under certain conditions', function () {
       var store = Socrates()
-      let state = store('change name', { name: 'matt', age: 26 })
+      let state = store('set user', { name: 'matt', age: 26 })
       assert.deepEqual(state, {
-        name: 'matt',
-        age: 26
+        user: {
+          name: 'matt',
+          age: 26
+        }
       })
     })
 
     it('should allow an emitter of literal strings', function () {
       var store = Socrates()
-      let state = store('change name', 'matt')
-      assert.deepEqual(state, 'matt')
+      let state = store('set name', 'matt')
+      assert.deepEqual(state, { name: 'matt' })
     })
 
     it('should allow an emitter of literal numbers', function () {
       var store = Socrates()
-      let state = store('change age', 5)
-      assert.deepEqual(state, 5)
+      let state = store('set user.age', 5)
+      assert.deepEqual(state, { user: { age: 5 } })
     })
   })
 
@@ -156,7 +158,7 @@ describe('Socrates', function () {
         if (!--pending) return done()
       })
 
-      return store('create', { name: 'matt', age: 26 })
+      return store('set', { name: 'matt', age: 26 })
     })
 
     it('should prevent state changes in a subscriber', function () {
@@ -171,7 +173,7 @@ describe('Socrates', function () {
       })
 
       try {
-        store('create', { name: 'matt', age: 26 })
+        store('set', { name: 'matt', age: 26 })
         throw new Error('this shouldnt happen')
       } catch (err) {
         includes(err.message, "Cannot assign to read only property 'name'")
@@ -198,7 +200,7 @@ describe('Socrates', function () {
 
       let state = store({ type: 'boot', payload: { user: { name: 'matt', age: 26 } } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26 } })
-      state = store({ type: 'user:age:bump', payload: 1 })
+      state = store({ type: 'bump user.age', payload: 1 })
       assert.deepEqual(state, { user: { name: 'matt', age: 27 } })
     })
 
@@ -225,7 +227,7 @@ describe('Socrates', function () {
 
       let state = store({ type: 'boot', payload: { user: { name: 'matt', age: 26, settings: { theme: 'red' } } } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26, settings: { theme: 'red' } } })
-      state = store({ type: 'user:settings:change', payload: { theme: 'blue' } })
+      state = store({ type: 'change:user.settings', payload: { theme: 'blue' } })
       assert.deepEqual(state, { user: { name: 'matt', age: 26, settings: { theme: 'blue' } } })
       assert.ok(called)
     })
@@ -259,7 +261,7 @@ describe('Socrates', function () {
         }
       })
 
-      store({ type: 'user:settings:update', payload: { password: 'lol' } })
+      store({ type: 'update:user.settings', payload: { password: 'lol' } })
       assert.deepEqual(store(), {
         user: {
           name: 'matt',
@@ -269,7 +271,7 @@ describe('Socrates', function () {
         }
       })
 
-      store({ type: 'user:theme:update', payload: { color: 'red' } })
+      store({ type: 'update:user.theme', payload: { color: 'red' } })
       assert.deepEqual(store(), {
         user: {
           name: 'matt',
@@ -309,7 +311,7 @@ describe('Socrates', function () {
 
       store(function (state) {
         return {
-          type: 'condos:add',
+          type: 'add:condos',
           payload: [{ id: 4, name: 'Villa Real', subdomain: 'villareal' }]
         }
       })
@@ -350,14 +352,14 @@ describe('Socrates', function () {
       })
 
       store('boot', { addons: [] })
-      store('addons:toggle', 'hello')
+      store('toggle:addons', 'hello')
       assert.deepEqual(store(), { addons: 'hello' })
     })
 
     it('should just assign when theres no reducer for it', function () {
       let store = Socrates({})
-      store('addons:set', [])
-      store('url:path:set', 'some url')
+      store('set:addons', [])
+      store('set:url.path', 'some url')
       assert.deepEqual(store(), {
         addons: [],
         url: {
@@ -368,9 +370,9 @@ describe('Socrates', function () {
 
     it('should delete with set and a null payload', function () {
       let store = Socrates({})
-      store('addons:set', [])
-      store('addons:set', null)
-      store('url:path:set', 'some url')
+      store('set:addons', [])
+      store('set:addons', null)
+      store('set:url.path', 'some url')
       assert.deepEqual(store(), {
         url: {
           path: 'some url'
@@ -383,14 +385,14 @@ describe('Socrates', function () {
     it('should support getting state', function () {
       var store = Socrates()
 
-      store({ type: 'boot', payload: { name: 'matt', age: 26 } })
-      store({ type: 'update', payload: { age: 27 } })
+      store({ type: 'set', payload: { name: 'matt', age: 26 } })
+      store({ type: 'set', payload: { age: 27 } })
       assert.deepEqual(store(), { name: 'matt', age: 27 })
     })
 
     it('should be frozen', function () {
       var store = Socrates()
-      store({ type: 'boot', payload: { name: 'matt', age: 26 } })
+      store({ type: 'set', payload: { name: 'matt', age: 26 } })
       let state = store()
       try {
         state.age = 27
