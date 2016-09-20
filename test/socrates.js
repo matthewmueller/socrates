@@ -60,6 +60,13 @@ describe('Socrates', function () {
       })
     })
 
+    it('should clear out objects that are set to null', function () {
+      var store = Socrates()
+      store({ type: 'set', payload: { name: 'matt', settings: { color: 'blue', theme: 'red' } } })
+      store({ type: 'set', payload: { settings: null } })
+      assert.deepEqual(store(), { name: 'matt' })
+    })
+
     it('should not allow you to operate on state in the reducer', function () {
       var store = Socrates(function (state, action) {
         if (action.payload && action.payload.name) {
