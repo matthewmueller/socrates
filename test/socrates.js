@@ -334,6 +334,37 @@ describe('Socrates', function () {
       })
     })
 
+    it.skip('should support shallow reducers with deeper types (fixes #17)', function () {
+      const store = Socrates({
+        user: {
+          websites: {
+            push (state, action) {
+              assert.equal(state, undefined)
+              assert.deepEqual(action, {
+                profileUrl: 'http://google.com'
+              })
+
+              let websites = state || []
+              return websites.concat(action)
+            }
+          }
+        }
+      })
+
+      store({
+        type: 'push user.websites.profileUrl',
+        payload: 'http://google.com'
+      })
+
+      assert.deepEqual(store(), {
+        user: {
+          websites: {
+            profileUrl: 'http://google.com'
+          }
+        }
+      })
+    })
+
     it('should support literal numbers', function () {
       let store = Socrates({
         boot (state, action) {
