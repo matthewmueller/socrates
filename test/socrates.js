@@ -417,6 +417,18 @@ describe('Socrates', function () {
         }
       })
     })
+
+    it.skip('should ignore sets that are the same', function () {
+      let store = Socrates()
+      let called = 0
+      store.subscribe(function () {
+        called++
+      })
+      store('set:url', 'google.com')
+      store('set:url', 'google.com')
+      store('set:url', 'yahoo.com')
+      assert.equal(called, 2)
+    })
   })
 
   describe('getting state', function () {
