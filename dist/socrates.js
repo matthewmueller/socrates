@@ -369,7 +369,7 @@ module.exports = Tree
  */
 
 function Tree (tree) {
-  let obj = walk(tree, [], {})
+  var obj = walk(tree, [], {})
   return handle(obj)
 }
 
@@ -385,9 +385,9 @@ function walk (tree, tail, out) {
   for (var key in tree) {
     if (!tree.hasOwnProperty(key)) continue
     else if (typeof tree[key] === 'function') {
-      let path = tail.length ? key + ':' + tail.join('.') : key
+      var path = tail.length ? key + ':' + tail.join('.') : key
       out[path] = tail.reduceRight(function (fn, k) {
-        let o = {}
+        var o = {}
         o[k] = fn
         return combine(o)
       }, tree[key])

@@ -1,5 +1,5 @@
 
-test:
+test: check
 	@./node_modules/.bin/mocha \
 		--reporter spec
 
@@ -21,5 +21,7 @@ minify: dist/socrates.prod.js
 		@mv $<.tmp dist/socrates.min.js
 		@rm dist/socrates.prod.js
 
+check:
+	./node_modules/.bin/browserify lib/index.js | ./node_modules/.bin/uglifyjs
 
 .PHONY: test
