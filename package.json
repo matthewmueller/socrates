@@ -1,6 +1,6 @@
 {
   "name": "socrates",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Batteries-included redux",
   "keywords": [
     "redux",
